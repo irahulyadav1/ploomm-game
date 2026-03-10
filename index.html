@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ploomm Arcade</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="landing" class="screen active">
+    <h1>Can you bring order to the chaos?</h1>
+    <p class="subtitle-main">
+        A corporate event planning simulation
+    </p>
+    <button id="startBtn" class="primary-btn">Enter Arcade</button>
+</section>
+
+<section id="instructions" class="screen hidden">
+    <div class="card instructions-card">
+        <h2 class="instructions-title">How to Play</h2>
+
+        <div class="instruction-row">
+            <div class="ball-demo orange-ball">PLOOMM</div>
+            <div class="instruction-text">
+                <strong>Catch</strong> the orange PLOOMM balls<br>
+                <span>+10 points each</span>
+            </div>
+        </div>
+
+        <div class="instruction-row">
+            <div class="ball-demo chaos-ball">Chaos</div>
+            <div class="instruction-text">
+                <strong>Dodge</strong> the black chaos balls<br>
+                <span>One hit and it's over!</span>
+            </div>
+        </div>
+
+        <div class="instruction-row">
+            <div class="dpad-demo">
+                <span class="dpad-hint">◀</span>
+                <span class="dpad-hint">▶</span>
+            </div>
+            <div class="instruction-text">
+                <strong>Tap</strong> the arrows to move<br>
+                <span>You have 30 seconds — good luck!</span>
+            </div>
+        </div>
+
+        <button id="instructionsBtn" class="primary-btn" style="margin-top:10px;">Start! 🎯</button>
+    </div>
+</section>
+
+<section id="avatarBox" class="screen hidden">
+    <div class="card">
+        <h2>YOUR AVATAR</h2>
+        <div class="avatar-portrait">
+            <img src="avatar.png" style="width:80px;height:80px;image-rendering:pixelated">
+        </div>	
+        <h3 style="font-size:1.3rem;font-weight:800;color:#1e3a8a;margin:6px 0 2px;letter-spacing:2px">JIM</h3>
+        <p class="subtitle">The Perfectionist &mdash; <em>Every detail must align</em></p>
+        <div class="metrics">
+            <p><strong>Event Need:</strong> Catering for product launch</p>
+            <p><strong>Budget:</strong> <span class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot empty"></span></span></p>
+<p><strong>Style:</strong> <span class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></span></p>
+<p><strong>Quality:</strong> <span class="dots"><span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span></span></p>
+        </div>
+        <button id="enterGameBtn" class="primary-btn">Let's Play</button>
+    </div>
+</section>
+
+<section id="game" class="screen hidden">
+    <div class="game-wrapper">
+        <div class="hud">
+            <span class="hud-label">SCORE</span>
+            <span id="score">000</span>
+        </div>
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <div class="dpad">
+            <button id="leftBtn" class="dpad-btn">◀</button>
+            <div class="dpad-center"></div>
+            <button id="rightBtn" class="dpad-btn">▶</button>
+        </div>
+    </div>
+</section>
+
+<section id="lose" class="screen hidden">
+    <h2 class="chaos-title">Oh no! You were hit with Chaos.</h2>
+
+    <p class="chaos-line">
+        In Corporate Event Planning, Chaos happens!
+    </p>
+
+    <p class="better-way">
+        But there’s a Better Way!
+    </p>
+
+    <button id="continueBtn" class="primary-btn">Continue with PLOOMM</button>
+<button id="tryAgainBtn" class="primary-btn">Try Again</button>
+</section>
+
+<section id="win" class="screen hidden">
+
+    <h2 class="win-title">You Win!!!</h2>
+
+    <div class="success-box">
+
+        <h1 class="box-heading">It’s that Easy with Ploomm!!!</h1>
+
+        <p class="vendor-line">
+            Jim found the perfect vendor for his event.
+        </p>
+
+        <div class="checklist">
+            <p>✔ Right Budget</p>
+            <p>✔ Premium Quality</p>
+            <p>✔ Professional Execution</p>
+        </div>
+
+        <p class="success-line">
+            With Ploomm, Jim ensured the event was a Perfect Success!
+        </p>
+
+        <div class="reward-box">
+            <p class="reward-title">Enjoy Your Reward 🎁</p>
+            <p class="reward-sub">Copy your coupon below:</p>
+            <p id="coupon" class="coupon"></p>
+        </div>
+
+    </div>
+
+    <p class="closing">
+        Thank You for playing at Ploomm’s Arcade.
+    </p>
+
+</section>
+
+<script src="game.js"></script>
+</body>
+</html>

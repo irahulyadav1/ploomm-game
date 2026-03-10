@@ -1,0 +1,576 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap');
+
+/* ─────────────────────────────────────────
+   BRAND TOKENS
+───────────────────────────────────────── */
+:root {
+  --orange:       #f97316;
+  --orange-dark:  #ea580c;
+  --blue:         #2563eb;
+  --blue-dark:    #1e3a8a;
+  --blue-mid:     #3b82f6;
+  --blue-light:   #bfdbfe;
+  --blue-pale:    #eef2ff;
+  --bg:           #f0f4ff;
+  --text:         #1e293b;
+  --muted:        #64748b;
+  --white:        #ffffff;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  color: var(--text);
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
+  background-color: var(--bg);
+}
+
+/* Perspective grid — CSS background */
+body::before {
+  content: '';
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(to bottom, rgba(240,244,255,0.95) 0%, rgba(240,244,255,0.3) 40%, rgba(240,244,255,0.0) 100%),
+    repeating-linear-gradient(to bottom, transparent, transparent 38px, rgba(37,99,235,0.18) 38px, rgba(37,99,235,0.18) 39px),
+    repeating-linear-gradient(to right,  transparent, transparent 38px, rgba(37,99,235,0.13) 38px, rgba(37,99,235,0.13) 39px);
+}
+
+body::after {
+  content: '';
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(37,99,235,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% -10%, rgba(37,99,235,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%,  transparent 30%, rgba(37,99,235,0.06) 100%);
+}
+
+/* ─────────────────────────────────────────
+   SCREENS
+───────────────────────────────────────── */
+.screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s ease;
+  padding: 20px;
+  z-index: 1;
+}
+
+.hidden { opacity: 0; pointer-events: none; }
+.active  { opacity: 1; pointer-events: all; }
+
+/* ─────────────────────────────────────────
+   TYPOGRAPHY
+───────────────────────────────────────── */
+h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: var(--blue-dark);
+  text-align: center;
+  width: 100%;
+  line-height: 1.25;
+}
+
+h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+.win-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--blue-dark);
+  text-align: center;
+}
+
+.box-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: var(--blue);
+  text-align: center;
+  font-weight: 700;
+}
+
+.subtitle-main {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  margin-top: -5px;
+  margin-bottom: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.subtitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+/* ─────────────────────────────────────────
+   BUTTONS — blue gradient, white text
+   Orange lives only in the game (balls +
+   score digits) and the coupon code.
+───────────────────────────────────────── */
+.primary-btn {
+  padding: 13px 32px;
+  background: linear-gradient(135deg, var(--blue-mid), var(--blue-dark));
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #172554, 0 6px 18px rgba(30,58,138,0.30);
+  position: relative;
+  top: 0;
+  letter-spacing: 0.03em;
+}
+
+.primary-btn:hover {
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  box-shadow: 0 4px 0 #0f172a, 0 8px 22px rgba(30,58,138,0.40);
+}
+
+.primary-btn:active {
+  top: 3px;
+  box-shadow: 0 1px 0 #172554, 0 2px 8px rgba(30,58,138,0.2);
+}
+
+#avatarBox .primary-btn { margin-top: 18px; }
+#lose .primary-btn      { margin-top: 22px; }
+
+/* ─────────────────────────────────────────
+   CARD
+───────────────────────────────────────── */
+.card {
+  background: rgba(255,255,255,0.90);
+  backdrop-filter: blur(12px);
+  padding: 32px 28px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(37,99,235,0.18);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.card p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.card strong {
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+/* ─────────────────────────────────────────
+   AVATAR SCREEN
+───────────────────────────────────────── */
+#avatarBox .card h2 {
+  font-size: 1.05rem;
+  color: var(--blue-dark);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.avatar-portrait {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid var(--blue);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  overflow: hidden;
+  box-shadow: 0 0 0 6px rgba(37,99,235,0.08);
+}
+
+.avatar-portrait img {
+  width: 90px;
+  height: 90px;
+  image-rendering: pixelated;
+  object-fit: contain;
+}
+
+.metrics {
+  margin-top: 14px;
+  background: rgba(37,99,235,0.05);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.metrics p {
+  margin: 6px 0;
+  font-size: 0.88rem;
+  color: var(--text);
+  text-align: left;
+}
+
+/* ─────────────────────────────────────────
+   GAME SCREEN
+───────────────────────────────────────── */
+#game {
+  padding: 0;
+  justify-content: flex-start;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  height: 100dvh;
+  margin: 0 auto;
+}
+
+/* ── SCORE BAR ── */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: var(--blue-dark);
+  padding: 10px 16px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 48px;
+}
+
+.hud-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: var(--blue-light);
+  letter-spacing: 3px;
+}
+
+/* Score digits — intentional orange pop inside the game UI */
+#score {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.4rem;
+  color: var(--orange);
+  text-shadow: 0 0 12px rgba(249,115,22,0.8);
+  letter-spacing: 4px;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* ── CANVAS ── */
+canvas {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: calc(100dvh - 48px - 84px);
+  flex-shrink: 0;
+  border-left: 2px solid var(--blue);
+  border-right: 2px solid var(--blue);
+}
+
+/* ── D-PAD ── */
+.dpad {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: var(--blue-dark);
+  padding: 14px 28px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  height: 84px;
+}
+
+.dpad-btn {
+  width: 72px;
+  height: 56px;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.1s;
+  position: relative;
+  top: 0;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.35);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+}
+
+.dpad-btn:active {
+  top: 4px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.22);
+}
+
+.dpad-center {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.dpad-center::after { content: 'PLOOMM'; }
+
+/* ─────────────────────────────────────────
+   LOSE SCREEN
+───────────────────────────────────────── */
+#lose { text-align: center; gap: 4px; }
+
+.chaos-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--blue-dark);
+}
+
+.chaos-line {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.better-way {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--blue);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ─────────────────────────────────────────
+   WIN SCREEN
+───────────────────────────────────────── */
+#win {
+  text-align: center;
+  padding-top: 20px;
+  gap: 6px;
+}
+
+.success-box {
+  margin: 10px auto;
+  padding: 20px 18px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1.5px solid rgba(37,99,235,0.15);
+  box-shadow: 0 8px 28px rgba(37,99,235,0.10);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.vendor-line {
+  margin: 8px 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.checklist {
+  margin: 12px 0;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.checklist p { margin: 5px 0; font-size: 0.93rem; }
+
+.success-line {
+  margin-top: 10px;
+  font-weight: 600;
+  color: var(--blue-dark);
+  font-size: 0.92rem;
+}
+
+.reward-box {
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, var(--blue-pale), #f0f9ff);
+  border-radius: 12px;
+  border: 1px solid rgba(37,99,235,0.12);
+}
+
+.reward-box p { margin: 4px 0; }
+
+.reward-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--blue-dark);
+  font-size: 0.95rem;
+}
+
+.reward-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* Coupon — second intentional orange moment (reward reveal) */
+.coupon {
+  margin-top: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: var(--orange);
+  text-shadow: 0 0 10px rgba(249,115,22,0.4);
+  letter-spacing: 2px;
+}
+
+.closing {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.filled { background: #2563eb; }
+.dot.empty  { background: #bfdbfe; border: 1.5px solid #93c5fd; }
+
+.secondary-btn {
+  margin-top: 10px;
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.secondary-btn:hover {
+  background: var(--blue-pale);
+}
+
+/* ─────────────────────────────────────────
+   INSTRUCTIONS SCREEN
+───────────────────────────────────────── */
+.instructions-card {
+  max-width: 92vw;
+  padding: 28px 24px;
+}
+
+.instructions-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--blue-dark);
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.instruction-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.instruction-text {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.instruction-text span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.ball-demo {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+
+.orange-ball {
+  background: radial-gradient(circle at 35% 35%, #fdba74, #f97316 50%, #c2410c);
+  box-shadow: 0 4px 14px rgba(249,115,22,0.5);
+}
+
+.chaos-ball {
+  background: radial-gradient(circle at 35% 35%, #475569, #1e293b 50%, #0f172a);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+.dpad-demo {
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.dpad-hint {
+  background: var(--blue-dark);
+  color: white;
+  border-radius: 6px;
+  padding: 6px 7px;
+  font-size: 0.85rem;
+}
